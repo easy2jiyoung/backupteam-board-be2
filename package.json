@@ -1,0 +1,24 @@
+{
+  "name": "backupteam-board-be2",
+  "version": "1.0.0",
+  "description": "정예반 게시판",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/easy2jiyoung/backupteam-board-be2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/easy2jiyoung/backupteam-board-be2/issues"
+  },
+  "homepage": "https://github.com/easy2jiyoung/backupteam-board-be2#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "express": "^4.18.2"
+  }
+}
