@@ -1,8 +1,9 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 const app = express();
 
-app.use(express.json(), cookieParser())
+app.use(express.json(), cookieParser(), cors())
 
 const movies = [
     {id: 1, movie_title: "Misérables, Les", hit_count: 23, user_id: 1, created_at: "2022-08-11 00:40:32"},
