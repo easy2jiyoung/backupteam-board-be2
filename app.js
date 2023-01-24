@@ -91,20 +91,39 @@ app.post('/movies', (req, res) => {
 
 
 // 영화 상세보기
-app.get('/movies:id', (req, res) => {
-    // 1. 사용자가 보내준 id 를 가져온다
-    // 2. id 에 해당하는 movie 를 가져온다
-    // 3. 가져온 movie 에서 hit_count 1을 더한 객체를 만든다
-    // 4. hit_count 1을 더한 객체를 movies 내에서 기존 객체에 치환한다. (findIndex, splice 사용)
-    // 5. hit_count 1을 더한 객체를 반환한다.
+app.get('/movies/:id', (req, res) => {
+    const {id}   = req.params
+    // console.log(id)
+    const movieId = movies.find(movie => movie.id === Number(id))
+    // console.log(movieId)
+    const plusHitcount = {
+        ...movieId,
+        hit_count: movieId.hit_count + 1
+    }
+    // console.log(plusHitcount)
+    const findIndex = movies.findIndex(movie => movie.id === movieId.id)
+    // console.log(findIndex)
+    movies.splice(findIndex, 1, plusHitcount)
+    // console.log(movies)
+    res.send(movies)
 })
 
-// 1. 사용자가 보내준 id 를 가져온다
-// 2. id 에 해당하는 movie 를 가져온다
-// 3. 가져온 movie 에서 hit_count 1을 더한 객체를 만든다
-// 4. hit_count 1을 더한 객체를 movies 내에서 기존 객체에 치환한다. (findIndex, splice 사용)
-// 5. hit_count 1을 더한 객체를 반환한다.
-
+/*
+1. 사용자가 보내준 id 를 가져온다
+    const {id}   = req.params
+2. id 에 해당하는 movie 를 가져온다
+    const movieId = movies.find(movie => movie.id === Number(id))
+3. 가져온 movie 에서 hit_count 1을 더한 객체를 만든다
+    const plusHitcount = {
+        ...movieId,
+        hit_count: movieId.hit_count + 1
+    }
+4. hit_count 1을 더한 객체를 movies 내에서 기존 객체에 치환한다. (findIndex, splice 사용)
+    const findIndex = movies.findIndex(movie => movie.id === movieId.id)
+    movies.splice(findIndex, 1, plusHitcount)
+5. hit_count 1을 더한 객체를 반환한다.
+    res.send(movies)
+*/
 
 app.listen(3100, () => {
     console.log(3100, "번으로 서버 연결")
