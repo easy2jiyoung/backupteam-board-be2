@@ -42,10 +42,31 @@ const users = [
 
 // 영화 제목 리스트
 app.get('/movies', (req, res) => {
-    res.send(movies.map(movie => ({
+    const page = req.query.page || 1
+    // console.log(page)
+
+    const movieList = movies.map(movie => ({
         ...movie,
         name: users.find(user => user.id === movie.user_id).name
-    })))
+    }))
+    movieList.sort((a, b) => {
+        const aTime = new Date(a.created_at).getTime()
+        const bTime = new Date(b.created_at).getTime()
+        return bTime - aTime
+    })
+    // console.log(movieList)
+    const movieCopy = [...movieList]
+    const lastPage = Math.ceil(movies.length / 4)
+    // console.log(lastPage)
+    const startIndex = (page - 1) * 4
+    // console.log(startIndex)
+    const movieSplice = movieCopy.splice(startIndex, 4)
+    // console.log(movieSplice)
+
+    res.send({
+        pageInfo: {lastPage},
+        movies: movieSplice
+    })
 })
 
 /* 
@@ -71,7 +92,7 @@ app.post('/movies', (req, res) => {
     var d= new Date();
     newMovie.created_at = new Date(d.getTime() - (d.getTimezoneOffset() * 60000)).toISOString()
     // console.log(newMovie)
-    movies.push(newMovie)
+    movies.unshift(newMovie)
     // console.log(movies)
     res.send(newMovie)
 })
