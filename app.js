@@ -106,7 +106,7 @@ app.get('/movies/:id', (req, res) => {
     // console.log(findIndex)
     movies.splice(findIndex, 1, plusHitcount)
     // console.log(movies)
-    res.send(movies)
+    res.send(movieId)
 })
 
 /*
