@@ -27,7 +27,7 @@ app.get('/movies', (req, res) => {
         const bTime = new Date(b.created_at).getTime()
         return bTime - aTime
     })
-    // console.log(movieList)
+    console.log(movieList)
     const movieCopy = [...movieList]
     const lastPage = Math.ceil(movies.length / 4)
     // console.log(lastPage)
